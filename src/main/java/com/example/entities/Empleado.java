@@ -47,7 +47,7 @@ public class Empleado implements Serializable {
     @Enumerated(EnumType.STRING)
     private Genero genero;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     private Departamento departamento;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "empleado")

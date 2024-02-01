@@ -14,8 +14,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CorreoServiceImpl implements CorreoService{
 
-    private CorreoDao correoDao;
-    private EmpleadoDao empleadoDao;
+    private final CorreoDao correoDao;
+    private final EmpleadoDao empleadoDao;
     @Override
     public List<Correo> correos(int idEmpleado) {
 
