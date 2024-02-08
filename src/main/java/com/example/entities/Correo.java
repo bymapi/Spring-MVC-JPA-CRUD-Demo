@@ -30,6 +30,6 @@ public class Correo implements Serializable {
     private int id;
     private String correo;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Empleado empleado;
 }

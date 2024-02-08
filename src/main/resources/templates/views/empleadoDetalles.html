@@ -17,6 +17,7 @@
                 <th>Date d'embauche</th>
                 <th>Salaire</th>
                 <th>Sexe</th>
+                <th>Image</th>
                 </tr>
             </thead>
 
@@ -28,6 +29,7 @@
                 <td th:text="${empleado.fechaAlta}"></td>
                 <td th:text="${empleado.salario}"></td>
                 <td th:text="${empleado.genero}"></td>
+                <img th:src="@{/images/}+${empleado.nombreFoto}" alt="Foto de perfil" height="365px" width="260px">
 
             </tbody>
 

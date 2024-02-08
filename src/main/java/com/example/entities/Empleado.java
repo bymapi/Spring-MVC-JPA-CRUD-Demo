@@ -43,11 +43,17 @@ public class Empleado implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaAlta;
     private double salario;
+    
 
     @Enumerated(EnumType.STRING)
     private Genero genero;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    // Nombre de la foto, porque el contenido se almacenará en el sistema de archivos
+    // (file system), en principio en la carpeta static directamente,
+    // o dentro de una carpeta que esté en static
+    private String nombreFoto;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Departamento departamento;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "empleado")

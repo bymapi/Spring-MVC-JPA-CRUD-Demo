@@ -9,7 +9,7 @@
 
     <fieldset>
         <legend><h1>Formulaire d'inscription / modification</h1></legend>
-        <form th:object="${empleado}" th:action="@{/persistir}" method="post">
+        <form th:object="${empleado}" th:action="@{/persistir}" method="post" enctype="multipart/form-data">
             <!-- Campo oculto para guardar el id -->
             <input type="hidden" th:field="*{id}">
 
@@ -74,7 +74,8 @@
                     th:value="${direccionesDeCorreo}">
             
             </fieldset>
-
+            <input type="file" name="file">
+            <!-- creamos el elemento para subir el formulario -->
             <input type="submit" value="Inscription/Modification">
         </form>
     </fieldset>

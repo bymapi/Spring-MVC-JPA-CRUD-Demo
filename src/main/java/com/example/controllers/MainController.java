@@ -1,5 +1,8 @@
 package com.example.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.entities.Correo;
 import com.example.entities.Departamento;
@@ -120,7 +124,55 @@ public class MainController {
     @Transactional
     public String persistirEmpleado(@ModelAttribute(name = "empleado") Empleado empleado,
         @RequestParam(name="tlf", required = false) String telefonosRecibidos,
-        @RequestParam(name="mails", required = false) String correosRecibidos){
+        @RequestParam(name="mails", required = false) String correosRecibidos,
+        @RequestParam(name = "file", required = false) MultipartFile imagen){
+
+        // Comprobamos si hemos recibido un archivo (el de la imagen)
+
+        if (!imagen.isEmpty()) {
+
+            // Vamos a trabajar todo el tiempo con NIO.2
+            // una URI es parte de la url y lleva delante el tipo de recurso
+            // al que vas a acceder
+            // Creamos una ruta que directamente no comprobamos si la ruta existe
+            // Recuperar la ruta relativa de la carpeta donde voy a almacenar el archivo
+            // la ruta relativa siempre es respecto de donde estés trabajando
+            // Una ruta es inmutable
+
+           Path imageFolder = Path.of("src/main/resources/static/images");
+
+           // Creamos la ruta absoluta, es todos los directorios que hay desde la raíz
+           // la raíz en windows es C, en Linux es /
+           // para construir esto en el paquete nio ya hay métodos
+           // que a partir de la ruta relativa te saca la absoluta
+           // TomCat es el que necesita la ruta completa
+
+           Path rutaAbsoluta = imageFolder.toAbsolutePath();
+
+           //además de la ruta absoluta necesitamos la ruta completa + nombre del archivo recibido
+
+           Path rutaCompleta = Path.of(rutaAbsoluta + "/" + imagen.getOriginalFilename());
+           
+            // A partir de este punto se pueden generar excepciones
+            // lo que me llegue lo voy a guardar en un array de bytes
+            // y después a la ruta
+
+            try {
+
+                byte[] bytesImage = imagen.getBytes();
+                Files.write(rutaCompleta, bytesImage);
+
+                // Lo que resta es establecer la propiedad foto del empleado
+                // al nombre original del archivo recibido
+
+                empleado.setNombreFoto(imagen.getOriginalFilename());
+
+                
+            } catch (IOException e) {
+                
+            }
+            
+        }
 
         // Procesar los teléfonos
         
@@ -166,6 +218,8 @@ public class MainController {
                                             
             
         }
+
+
 
         empleadoService.persistirEmpleado(empleado);
         return "redirect:/all";
