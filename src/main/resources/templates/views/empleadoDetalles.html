@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BD:Détails</title>
+</head>
+<body>
+    <h1 th:text="'Détails sur '+${empleado.nombre}"></h1>
+    <tr>
+        <table>
+            <thead>
+                <tr>
+                <th>Prènom</th>
+                <th>Nom</th>
+                <th>Second Nom</th>
+                <th>Date d'embauche</th>
+                <th>Salaire</th>
+                <th>Sexe</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                
+                <td th:text="${empleado.nombre}"></td>
+                <td th:text="${empleado.primerApellido}"></td>
+                <td th:text="${empleado.segundoApellido}"></td>
+                <td th:text="${empleado.fechaAlta}"></td>
+                <td th:text="${empleado.salario}"></td>
+                <td th:text="${empleado.genero}"></td>
+
+            </tbody>
+
+
+
+        </table>
+
+
+        </tr>
+
+       
+</body>
+</html>

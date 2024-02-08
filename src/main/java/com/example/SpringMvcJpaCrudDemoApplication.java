@@ -47,11 +47,11 @@ public class SpringMvcJpaCrudDemoApplication implements CommandLineRunner{
 							.build();
 
 		Departamento dpt2 = Departamento.builder()
-							.nombre("INFORMATICA")
+							.nombre("INFORMATIQUE")
 							.build();
 		
 		Departamento dpt3 = Departamento.builder()
-							.nombre("CONTABILIDAD")
+							.nombre("CONTABILITÉ")
 							.build();
 
 		
@@ -69,7 +69,7 @@ public class SpringMvcJpaCrudDemoApplication implements CommandLineRunner{
 				.segundoApellido("Emp1Ap1")
 				.fechaAlta(LocalDate.of(2000, Month.JANUARY, 12))
 				.salario(3000)
-				.genero(Genero.MUJER)
+				.genero(Genero.FEMME)
 				.departamento(departamentoService.dameUnDepartamento(1))
 				.build();
 
@@ -80,7 +80,7 @@ public class SpringMvcJpaCrudDemoApplication implements CommandLineRunner{
 				.segundoApellido("Emp2Ap2")
 				.fechaAlta(LocalDate.of(2010, Month.APRIL, 20))
 				.salario(700)
-				.genero(Genero.HOMBRE)
+				.genero(Genero.HOMME)
 				.departamento(departamentoService.dameUnDepartamento(2))
 				.build();
 

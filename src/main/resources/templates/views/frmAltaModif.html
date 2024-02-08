@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BD:formulaire</title>
+</head>
+<body>
+
+    <fieldset>
+        <legend><h1>Formulaire d'inscription / modification</h1></legend>
+        <form th:object="${empleado}" th:action="@{/persistir}" method="post">
+            <!-- Campo oculto para guardar el id -->
+            <input type="hidden" th:field="*{id}">
+
+            <fieldset>
+                <legend><h3>Données personnelles</h3></legend>
+
+                <label for="nombre">Prènom: </label>
+                <input type="text" id="nombre" th:field="*{nombre}">
+
+                <label for="primerApellido">Nom: </label>
+                <input type="text" id="primerApellido" th:field="*{primerApellido}">
+
+                <label for="segundoApellido">Nom 2: </label>
+                <input type="text" id="segundoApellido" th:field="*{segundoApellido}">
+
+                <legend>Sexe: </legend>
+                <label for="homme">Homme</label>
+                <input type="radio" name="genero" id="homme" value="HOMME" th:field="*{genero}">
+                <label for="femme">Femme</label>
+                <input type="radio" name="genero" id="femme" value="FEMME" th:field="*{genero}">
+                <label for="autre">Autre</label>
+                <input type="radio" name="genero" id="autre" value="AUTRE" th:field="*{genero}">
+                
+            </fieldset>
+
+            <fieldset> 
+
+                <legend><h3>BD</h3></legend>
+                
+                <!-- Pedir el departamento -->
+                <label for="departamento">Département</label>
+                <select name="departamento" id="departamento">
+                    <option></option>
+                    <option th:each=" departamento: ${departamentos}"
+                        th:value="${departamento.id}"
+                        th:text="${departamento.nombre}"
+                        th:selected = "${empleado.id != 0 and empleado.departamento.id == departamento.id}">
+                    </option>
+                </select>
+    
+                <label for="fechaAlta">Date d'embauche: </label>
+                <input type="date" id="fechaAlta" th:field="*{fechaAlta}">
+
+                <label for="salario">Salaire: </label>
+                <input type="text" id="salario" th:field="*{salario}">
+
+            </fieldset>
+ 
+
+            <fieldset>
+                <legend><h3>Données du contact</h3></legend>
+            <!-- Pedir el teléfono -->
+            <label for="telefonos">Téléphone</label>
+            <input type="text" id="telefonos" name="tlf"
+                placeholder="un ou plusieurs, séparés par ;"
+                    th:value="${numerosDeTelefono}">
+
+            <!-- Pedir el correo -->
+            <label for="correos">Mail</label>
+            <input type="text" id="correos" name="mails"
+                placeholder="un ou plusieurs, séparés par ;"
+                    th:value="${direccionesDeCorreo}">
+            
+            </fieldset>
+
+            <input type="submit" value="Inscription/Modification">
+        </form>
+    </fieldset>
+
+</body>
+</html>

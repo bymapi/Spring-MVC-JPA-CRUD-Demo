@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BD: Home</title>
+</head>
+<body>
+    
+    <h1>CRUD d'employés</h1>
+    <h3>#Spring #MVC #JPA #Thymeleaf</h3>
+
+
+    <h3>Liste d'employés</h3>
+
+    <table>
+        <thead>
+            <tr>
+            <th>Prènom</th>
+            <th>Nom</th>
+            <th>Second Nom</th>
+            <th>Date d'embauche</th>
+            <th>Salaire</th>
+            <th>Sexe</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each=" empleado : ${empleados}">
+            <td th:text="${empleado.nombre}"></td>
+            <td th:text="${empleado.primerApellido}"></td>
+            <td th:text="${empleado.segundoApellido}"></td>
+            <td th:text="${empleado.fechaAlta}"></td>
+            <td th:text="${empleado.salario}"></td>
+            <td th:text="${empleado.genero}"></td>
+            <td>
+                <!-- Esta es la manera antigua de anclar a detalles
+                    <a th:href="@{/detalles?id=}+${empleado.id}">Détails</a> -->
+                <!-- Para hacerlo de la forma moderna es la siguiente -->
+                
+            <a th:href="@{/detalles/}+${empleado.id}">Détails</a>
+            <a th:href="@{/update/}+${empleado.id}">Modification</a>
+            <a th:href="@{/delete/}+${empleado.id}">Supprimer</a>
+        
+        </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <a th:href="@{/frmAltaModif/}">Formulaire d'inscription</a>
+    </div>
+
+
+
+</body>
+</html>
